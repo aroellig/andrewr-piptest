@@ -25,7 +25,7 @@ jobs:
       run: |
         mkdir -p ~/.pip
         echo "[global]" >> ~/.pip/pip.conf
-        echo "index-url = https://andrewr:cmVmdGtuOjAxOjE3NjAxMjAzODc6UDk2ZklNWG5YYW1SdGtVQVE3aWdrQWZoczRQ@gpgtest.jfrog.io/artifactory/api/pypi/andrewr-pypi-testvirt/simple" >> ~/.pip/pip.conf
+        echo "index-url = https://andrewr:<token>@gpgtest.jfrog.io/artifactory/api/pypi/andrewr-pypi-testvirt/simple" >> ~/.pip/pip.conf
 
     - name: Install dependencies
       run: |
