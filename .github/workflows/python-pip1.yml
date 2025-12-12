@@ -1,0 +1,33 @@
+name: Install from Artifactory
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+  pull_request:
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  # Specify your Python version
+
+    - name: Configure pip
+      run: |
+        mkdir -p ~/.pip
+        echo "[global]" >> ~/.pip/pip.conf
+        echo "index-url = https://andrewr:${{ secrets.ARTIFACTORY_TOKEN }}@gpgtest.jfrog.io/artifactory/api/pypi/andrewr-pypi-testvirt/simple" >> ~/.pip/pip.conf
+
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt  # Adjust if you have a different requirements file
